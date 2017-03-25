@@ -1,0 +1,39 @@
+{
+  "name": "flashcard-app-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.3",
+    "reselect": "^2.5.4",
+    "seamless-immutable": "^7.0.1",
+    "semantic-ui-css": "^2.2.9",
+    "semantic-ui-react": "^0.67.1",
+    "spaced-repetition": "^0.1.0",
+    "styled-components": "^1.4.4"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.41.0",
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "semi": [
+        "error",
+        "never"
+      ],
+      "comma-dangle": 1
+    }
+  }
+}
