@@ -6,18 +6,22 @@ import type { LastAnswerType, CardType, StateType } from 'fl-flashcard'
 export const types = {
   SUBMIT_WORD: 'FLASHCARD/SUBMIT_WORD',
   ANSWER_CORRECTLY: 'FLASHCARD/ANSWER_CORRECTLY',
-  ANSWER_INCORRECTLY: 'FLASHCARD/ANSWER_INCORRECTLY'
+  ANSWER_INCORRECTLY: 'FLASHCARD/ANSWER_INCORRECTLY',
+  REQUEST_UDPATE_CARD: 'FLASHCARD/REQUEST_UPDATE_CARD',
+  UDPATE_CARD: 'FLASHCARD/UPDATE_CARD'
 }
 
 export const actions = {
   submit: (answer: string) => ({ type: types.SUBMIT_WORD, payload: answer }),
   answerCorrectly: (answer: string) => ({ type: types.ANSWER_CORRECTLY, payload: answer }),
-  answerIncorrectly: (answer: string) => ({ type: types.ANSWER_INCORRECTLY, payload: answer })
+  answerIncorrectly: (answer: string) => ({ type: types.ANSWER_INCORRECTLY, payload: answer }),
+  requestUpdateCard: () => ({ type: types.REQUEST_UDPATE_CARD }),
+  updateCard: (newCard: CardType) => ({ type: types.UDPATE_CARD, payload: newCard })
 }
 
 export const initialState = {
-  word: 'Manzana',
-  meaning: 'Apple',
+  word: '',
+  meaning: '',
   lastAnswer: null
 }
 
@@ -27,8 +31,6 @@ export default (state: StateType = initialState, { type, payload }: ActionType) 
     case types.ANSWER_CORRECTLY:
       return {
         ...state,
-        word: 'Word',
-        meaning: 'Palabra',
         lastAnswer: {
           word: state.word,
           answer: payload,
@@ -43,6 +45,12 @@ export default (state: StateType = initialState, { type, payload }: ActionType) 
           answer: payload,
           correct: false
         }
+      }
+    case types.UDPATE_CARD:
+      return {
+        ...state,
+        word: payload ? payload.word : '',
+        meaning: payload ? payload.meaning : ''
       }
     default:
       return state
