@@ -2,10 +2,11 @@
 
 import { connect } from 'react-redux'
 import Flashcard from '../components/Flashcard'
-import { actions, getCurrentCard } from '../reducers/flashcard'
+import { actions, getCurrentCard, getLastAnswer } from '../reducers/flashcard'
 
 const mapStateToProps = (state) => ({
-  ...getCurrentCard(state)
+  card: getCurrentCard(state),
+  lastAnswer: getLastAnswer(state)
 })
 
 const mapDispatchToProps = {

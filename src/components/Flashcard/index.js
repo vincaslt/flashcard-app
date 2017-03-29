@@ -4,12 +4,8 @@ import React, { PureComponent } from 'react'
 import { Header, Segment, Input } from 'semantic-ui-react'
 import Box from './Box'
 import ColoredSegment from './ColoredSegment'
-
-type PropTypes = {
-  word: string,
-  meaning: string,
-  submit: Function
-}
+import type { PropTypes, LastAnswerType } from 'fl-flashcard'
+import { colors } from '../../constants'
 
 export default class Flashcard extends PureComponent {
   props: PropTypes
@@ -29,11 +25,20 @@ export default class Flashcard extends PureComponent {
   }
 
   render() {
-    const { word, meaning } = this.props
+    const { word, meaning } = this.props.card
+    const lastAnswer: ?LastAnswerType = this.props.lastAnswer
+    let blinkColor = null
+
+    if (lastAnswer) {
+      blinkColor = lastAnswer.correct ? colors.success : colors.error
+    }
+
     return (
       <Box>
         <Segment.Group>
-          <ColoredSegment><Header as="h3">{word}</Header></ColoredSegment>
+          <ColoredSegment blinkColor={blinkColor}>
+            <Header as="h3">{word}</Header>
+          </ColoredSegment>
           <Segment>
             <Input
               value={this.state.text}
@@ -41,6 +46,7 @@ export default class Flashcard extends PureComponent {
               placeholder={meaning}
               onKeyPress={this._submit}
             />
+            {lastAnswer && !lastAnswer.status ? `${lastAnswer.answer} is incorrect` : ''}
           </Segment>
         </Segment.Group>
       </Box>
