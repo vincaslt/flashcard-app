@@ -36,7 +36,7 @@ export default (state: StateType = initialState, { type, payload }: ActionType) 
           answer: payload,
           correct: true
         }
-      } // TODO: get next word from some queue
+      }
     case types.ANSWER_INCORRECTLY:
       return {
         ...state,

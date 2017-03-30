@@ -4818,9 +4818,9 @@ source-map@~0.2.0:
   dependencies:
     amdefine ">=0.0.4"
 
-spaced-repetition@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/spaced-repetition/-/spaced-repetition-0.1.0.tgz#bc0246509af2966462bf73a3d31ce1828bd73c67"
+spaced-repetition@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/spaced-repetition/-/spaced-repetition-0.1.1.tgz#67ad1900b347a0125a74ad4cc962b74e229bcc99"
   dependencies:
     human-interval "^0.1.6"
 

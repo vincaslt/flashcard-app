@@ -4,4 +4,13 @@ const colors = {
   shadow: 'rgba(0, 0, 0, 0.02)'
 }
 
-export { colors }
+const WordStatus = {
+  NEW: 'new',
+  BAD: 'bad',
+  FRESH: 'fresh',
+  AVERAGE: 'average',
+  OLD: 'old',
+  NEVER: 'never'
+}
+
+export { colors, WordStatus }

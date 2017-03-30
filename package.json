@@ -13,7 +13,7 @@
     "seamless-immutable": "^7.0.1",
     "semantic-ui-css": "^2.2.9",
     "semantic-ui-react": "^0.67.1",
-    "spaced-repetition": "^0.1.0",
+    "spaced-repetition": "^0.1.1",
     "styled-components": "^1.4.4"
   },
   "devDependencies": {
