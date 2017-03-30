@@ -7,9 +7,14 @@ import ColoredSegment from './ColoredSegment'
 import type { PropTypes, LastAnswerType } from 'fl-flashcard'
 import { colors } from '../../constants'
 
+type StateType = {
+  text: string,
+  viewHash: ?number
+}
+
 export default class Flashcard extends Component {
   props: PropTypes
-  state = {
+  state: StateType = {
     text: '',
     viewHash: null // Used to refresh blink component after submits
   }
