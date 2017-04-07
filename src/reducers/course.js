@@ -16,8 +16,8 @@ export const types = {
 export const actions = {
   requestCourseLoad: () => ({ type: types.REQUEST_COURSE_LOAD }),
   loadCourse: (words: Array<CourseQuestionType>) => ({ type: types.LOAD_COURSE, payload: words }),
-  updateWordStatus: (word: string, status: string) => ({ type: types.UPDATE_WORD_STATUS, payload: {
-    word, status
+  updateWordStatus: (word: string, status: string, nextDate: Date) => ({ type: types.UPDATE_WORD_STATUS, payload: {
+    word, status, nextDate: nextDate.getTime()
   } })
 }
 
@@ -41,25 +41,36 @@ export default (state: StateType = initialState, { type, payload }: ActionType) 
         isLoading: false,
         questions: words.map(word => ({
           ...word,
-          status: WordStatus.NEW
+          status: WordStatus.NEW,
+          nextDate: null
         }))
       }
     case types.UPDATE_WORD_STATUS:
-      if (!payload) {
-        return state
+      if (payload) {
+        const wordIndex = state.questions.findIndex(question => ( question.word === payload.word ))
+        state.questions[wordIndex].status = payload.status
+        state.questions[wordIndex].nextDate = payload.nextDate
+        return {
+          ...state,
+          questions: state.questions.slice()
+        }
       }
-      const wordIndex = state.questions.findIndex(question => ( question.word === payload.word ))
-      state.questions[wordIndex].status = payload.status
-      return {
-        ...state,
-        questions: state.questions.slice()
-      }
+      return state
     default:
       return state
   }
 }
 
-export const getAllQuestions = (state: Object): Array<CourseQuestionType> => state.course.questions
+const _selectAllQuestions = (state: Object) => state.course.questions
+
+export const isLoading = (state: Object): boolean => state.course.isLoading
+export const getAllQuestions: Array<CourseQuestionType> = createSelector(
+  _selectAllQuestions,
+  (questions) => questions.map(question => ({
+    ...question,
+    nextDate: question.nextDate ? new Date(question.nextDate) : null
+  }))
+)
 export const getCurrentQuestion: CourseQuestionType = createSelector(
   getAllQuestions,
   getCurrentCard,
@@ -68,4 +79,3 @@ export const getCurrentQuestion: CourseQuestionType = createSelector(
     return wordIndex !== -1 ? questions.slice(wordIndex, wordIndex + 1)[0] : null
   }
 )
-export const isLoading = (state: Object): boolean => state.course.isLoading

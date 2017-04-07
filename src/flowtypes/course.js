@@ -5,7 +5,8 @@ declare module 'fl-course' {
   declare type CourseQuestionType = {
     word: string,
     meaning: string,
-    status: WordStatus
+    status: WordStatus,
+    nextDate: Date
   }
 
   declare type StateType = {
