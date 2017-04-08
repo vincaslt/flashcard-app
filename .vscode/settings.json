@@ -1,5 +1,4 @@
 {
-  "vsicons.presets.angular": false,
   "standard.enable": false,
   "javascript.validate.enable": false,
   "eslint.enable": true
