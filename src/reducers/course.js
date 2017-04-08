@@ -1,12 +1,13 @@
 // @flow
 
 import { getCurrentCard } from './flashcard'
-import { WordStatus } from '../constants'
 import type { ActionType, StateType } from 'fl-types'
 import type { CourseQuestionType, StateType as CourseState } from 'fl-course'
 import type { CardType } from 'fl-flashcard'
 import { createSelector } from 'reselect'
 import type { Selector } from 'reselect'
+import Immutable from 'seamless-immutable'
+import type { Immutable as ImmutableType } from 'fl-seamless-immutable'
 
 export const types = {
   REQUEST_COURSE_LOAD: 'COURSE/REQUEST_COURSE_LOAD',
@@ -24,45 +25,32 @@ export const actions = {
   completeCourse: () => ({ type: types.COMPLETE_COURSE })
 }
 
-export const initialState = {
-  questions: [],
+export const initialState = Immutable({
+  questions: Immutable([]),
   isLoading: false,
   complete: false
-}
+})
 
-// FIXME: rework to immutable
-export default (state: CourseState = initialState, { type, payload }: ActionType) => {
+export default (state: ImmutableType<CourseState> = initialState, { type, payload }: ActionType) => {
   switch (type) {
     case types.REQUEST_COURSE_LOAD:
-      return {
-        ...state,
-        isLoading: true
-      }
+      return state.set('isLoading', true)
     case types.LOAD_COURSE:
-      const words = payload || []
-      return {
-        ...state,
-        isLoading: false,
-        questions: words.map(word => ({
-          ...word,
-          status: WordStatus.NEW, // TODO: statuses from API
-          nextDate: null
-        })),
-        complete: false
-      }
+      return state
+        .set('isLoading', false)
+        .set('complete', false)
+        .set('questions', Immutable(payload || []))
     case types.UPDATE_WORD_STATUS:
       if (payload) {
-        const wordIndex = state.questions.findIndex(question => ( question.word === payload.word ))
-        state.questions[wordIndex].status = payload.status
-        state.questions[wordIndex].nextDate = payload.nextDate
-        return {
-          ...state,
-          questions: state.questions.slice()
-        }
+        const wordIndex = state.questions
+          .findIndex(question => ( payload && question.word === payload.word ))
+        return state
+          .setIn(['questions', wordIndex, 'status'], payload.status)
+          .setIn(['questions', wordIndex, 'nextDate'], payload.nextDate)
       }
       return state
     case types.COMPLETE_COURSE:
-      return { ...state, complete: true }
+      return state.set('complete', true)
     default:
       return state
   }

@@ -28,9 +28,10 @@ function* submitAnswerSaga(action) {
 }
 
 function* requestUpdateCard(action) {
-  const selectNextCard = (cards): CardType => {
+  const selectNextCard = (cards): ?CardType => {
     const remaining = cards
       .filter((card: CourseQuestionType) => card.status !== WordStatus.NEVER)
+      .asMutable()
       .sort((a: CourseQuestionType, b: CourseQuestionType) => {
         if (b.nextDate === null) {
           return a.nextDate
