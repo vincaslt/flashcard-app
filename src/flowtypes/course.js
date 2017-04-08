@@ -11,7 +11,8 @@ declare module 'fl-course' {
 
   declare type StateType = {
     questions: Array<CourseQuestionType>,
-    isLoading: boolean
+    isLoading: boolean,
+    complete: boolean
   }
 
   declare type WordStatusType = $Keys<typeof WordStatus>

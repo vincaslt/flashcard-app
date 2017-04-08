@@ -1,7 +1,7 @@
 // @flow
 
-import type { ActionType } from 'fl-types'
-import type { RepetitionConfigType, StateType } from 'fl-settings'
+import type { ActionType, StateType } from 'fl-types'
+import type { RepetitionConfigType, StateType as SettingsState } from 'fl-settings'
 
 export const types = {}
 
@@ -19,11 +19,11 @@ export const initialState = {
 }
 
 // FIXME: rework to immutable
-export default (state: StateType = initialState, { type, payload }: ActionType) => {
+export default (state: SettingsState = initialState, { type, payload }: ActionType) => {
   switch (type) {
     default:
       return state
   }
 }
 
-export const getRepetitionConfig = (state: Object): RepetitionConfigType => state.settings.repetition
+export const getRepetitionConfig = (state: StateType): RepetitionConfigType => state.settings.repetition

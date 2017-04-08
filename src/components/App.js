@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import Flashcard from '../containers/Flashcard'
+import Course from '../containers/Course'
 import { Grid } from 'semantic-ui-react'
 
 class App extends Component {
@@ -9,7 +10,9 @@ class App extends Component {
     return (
       <Grid centered>
         <Grid.Column width="4">
-          <Flashcard></Flashcard>
+          <Course>
+            <Flashcard></Flashcard>
+          </Course>
         </Grid.Column>
       </Grid>
     )

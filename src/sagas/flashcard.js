@@ -43,12 +43,16 @@ function* requestUpdateCard(action) {
         }
         return a.nextDate.getTime() - b.nextDate.getTime()
       })
-    return remaining[0]
+    return remaining.length ? remaining[0] : null
   }
 
   const cards = yield select(getAllQuestions)
   const nextCard = selectNextCard(cards)
-  yield put(flashcardActions.updateCard(nextCard))
+  if (nextCard) {
+    yield put(flashcardActions.updateCard(nextCard))
+  } else {
+    yield put(courseActions.completeCourse())
+  }
 }
 
 export default [

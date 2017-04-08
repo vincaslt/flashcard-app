@@ -1,7 +1,7 @@
 // @flow
 
-import type { ActionType } from 'fl-types'
-import type { LastAnswerType, CardType, StateType } from 'fl-flashcard'
+import type { ActionType, StateType } from 'fl-types'
+import type { LastAnswerType, CardType, StateType as FlashcardState } from 'fl-flashcard'
 
 export const types = {
   SUBMIT_WORD: 'FLASHCARD/SUBMIT_WORD',
@@ -26,7 +26,7 @@ export const initialState = {
 }
 
 // FIXME: rework to immutable
-export default (state: StateType = initialState, { type, payload }: ActionType) => {
+export default (state: FlashcardState = initialState, { type, payload }: ActionType) => {
   switch (type) {
     case types.ANSWER_CORRECTLY:
       return {
@@ -57,5 +57,5 @@ export default (state: StateType = initialState, { type, payload }: ActionType) 
   }
 }
 
-export const getCurrentCard = (state: Object): CardType => ({ word: state.flashcard.word, meaning: state.flashcard.meaning })
-export const getLastAnswer = (state: Object): ?LastAnswerType => state.flashcard.lastAnswer
+export const getCurrentCard = (state: StateType): CardType => ({ word: state.flashcard.word, meaning: state.flashcard.meaning })
+export const getLastAnswer = (state: StateType): ?LastAnswerType => state.flashcard.lastAnswer
