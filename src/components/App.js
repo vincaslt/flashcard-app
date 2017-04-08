@@ -9,7 +9,7 @@ class App extends Component {
   render() {    
     return (
       <Grid centered>
-        <Grid.Column width="4">
+        <Grid.Column widescreen="4" computer="7" tablet="10" mobile="16">
           <Course>
             <Flashcard></Flashcard>
           </Course>

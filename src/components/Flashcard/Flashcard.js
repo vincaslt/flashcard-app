@@ -1,7 +1,9 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Header, Segment, Input } from 'semantic-ui-react'
+import { Header, Button, Segment } from 'semantic-ui-react'
+import Input from './Input'
+import StyledSegment from './Segment'
 import Box from './Box'
 import ColoredSegment from './ColoredSegment'
 import type { PropTypes, LastAnswerType } from 'fl-flashcard'
@@ -19,11 +21,15 @@ export default class Flashcard extends Component {
     viewHash: null // Used to refresh blink component after submits
   }
 
-  _submit = ({ key }: SyntheticKeyboardEvent) => {
+  _onKeyPress = ({ key }: SyntheticKeyboardEvent) => {
     if (key === 'Enter') {
-      this.props.submit(this.state.text)
-      this.setState({ text: '', viewHash: Math.random() })
+      this._submit()
     }
+  }
+
+  _submit = () => {
+    this.props.submit(this.state.text)
+    this.setState({ text: '', viewHash: Math.random() })
   }
 
   _onTextChange = ({ target }: SyntheticInputEvent) => {
@@ -45,14 +51,15 @@ export default class Flashcard extends Component {
           <ColoredSegment key={this.state.viewHash} blinkColor={blinkColor}>
             <Header as="h3">{word}</Header>
           </ColoredSegment>
-          <Segment>
+          <StyledSegment>
             <Input
               value={this.state.text}
               onChange={this._onTextChange}
-              onKeyPress={this._submit}
+              onKeyPress={this._onKeyPress}
               { ...(lastAnswer && !lastAnswer.correct) ? { placeholder: meaning } : {} }
             />
-          </Segment>
+            <Button content='Next' icon='right arrow' labelPosition='right' onClick={this._submit} />
+          </StyledSegment>
         </Segment.Group>
       </Box>
     )
