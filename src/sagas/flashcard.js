@@ -17,7 +17,7 @@ function* submitAnswerSaga(action) {
 
   if (submittedAnswer.toLowerCase() === meaning.toLowerCase()) {
     yield put(flashcardActions.answerCorrectly(submittedAnswer))
-    const nextRepetition = repetition.good()
+    const nextRepetition = repetition.good() // TODO: account for good/ok difference
     yield put(courseActions.updateWordStatus(word, nextRepetition.state, nextRepetition.date))
     yield put(flashcardActions.requestUpdateCard())
   } else {
@@ -29,21 +29,18 @@ function* submitAnswerSaga(action) {
 
 function* requestUpdateCard(action) {
   const selectNextCard = (cards): ?CardType => {
-    const remaining = cards
-      .filter((card: CourseQuestionType) => card.status !== WordStatus.NEVER)
+    const remaining: Array<CourseQuestionType> = cards
+      // Ignore words that are already learnt or their date is not yet due
+      .filter((card: CourseQuestionType) => (
+        card.status !== WordStatus.NEVER) &&
+        (new Date(card.nextDate) <= (new Date()).getTime())
+      )
       .asMutable()
+      // Sort: time<now | null
       .sort((a: CourseQuestionType, b: CourseQuestionType) => {
-        if (b.nextDate === null) {
-          return a.nextDate
-            ? (a.nextDate.getTime() - (new Date()).getTime())
-            : 0
-        } else if (a.nextDate === null) {
-          return b.nextDate
-            ? ((new Date()).getTime() - b.nextDate.getTime())
-            : 0
-        }
-        return a.nextDate.getTime() - b.nextDate.getTime()
+        return new Date(a.nextDate).getTime() - new Date(b.nextDate).getTime()
       })
+
     return remaining.length ? remaining[0] : null
   }
 
@@ -58,5 +55,5 @@ function* requestUpdateCard(action) {
 
 export default [
   takeLatest(flashcardTypes.SUBMIT_WORD, submitAnswerSaga),
-  takeEvery(flashcardTypes.REQUEST_UDPATE_CARD, requestUpdateCard)
+  takeEvery(flashcardTypes.REQUEST_UPDATE_CARD, requestUpdateCard)
 ]

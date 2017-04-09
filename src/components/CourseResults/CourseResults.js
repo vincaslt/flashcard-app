@@ -14,7 +14,9 @@ const CourseResults = ({ questions, ...rest }: PropTypes) => {
     <Table.Row key={question.word + question.meaning}>
       <Table.Cell>{question.word}</Table.Cell>
       <Table.Cell>{question.meaning}</Table.Cell>
+      <Table.Cell>{question.status}</Table.Cell>
     </Table.Row>
+    
   ))
 
   return (
@@ -28,6 +30,7 @@ const CourseResults = ({ questions, ...rest }: PropTypes) => {
           <Table.Row>
             <Table.HeaderCell>Word</Table.HeaderCell>
             <Table.HeaderCell>Meaning</Table.HeaderCell>
+            <Table.HeaderCell>Strength</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 

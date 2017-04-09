@@ -5,7 +5,7 @@ import { actions as flashcardActions } from '../reducers/flashcard'
 import { takeLatest, put, call } from 'redux-saga/effects'
 import { getWords } from '../api/words'
 
-function* requestCourseLoadSaga(action) {
+function* requestCourseLoadSaga() {
   const words = yield call(getWords)
   yield put(actions.loadCourse(words))
   yield put(flashcardActions.requestUpdateCard())

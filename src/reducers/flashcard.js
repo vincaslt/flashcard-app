@@ -9,16 +9,16 @@ export const types = {
   SUBMIT_WORD: 'FLASHCARD/SUBMIT_WORD',
   ANSWER_CORRECTLY: 'FLASHCARD/ANSWER_CORRECTLY',
   ANSWER_INCORRECTLY: 'FLASHCARD/ANSWER_INCORRECTLY',
-  REQUEST_UDPATE_CARD: 'FLASHCARD/REQUEST_UPDATE_CARD',
-  UDPATE_CARD: 'FLASHCARD/UPDATE_CARD'
+  REQUEST_UPDATE_CARD: 'FLASHCARD/REQUEST_UPDATE_CARD',
+  UPDATE_CARD: 'FLASHCARD/UPDATE_CARD'
 }
 
 export const actions = {
   submit: (answer: string) => ({ type: types.SUBMIT_WORD, payload: answer }),
   answerCorrectly: (answer: string) => ({ type: types.ANSWER_CORRECTLY, payload: answer }),
   answerIncorrectly: (answer: string) => ({ type: types.ANSWER_INCORRECTLY, payload: answer }),
-  requestUpdateCard: () => ({ type: types.REQUEST_UDPATE_CARD }),
-  updateCard: (newCard: CardType) => ({ type: types.UDPATE_CARD, payload: newCard })
+  requestUpdateCard: () => ({ type: types.REQUEST_UPDATE_CARD }),
+  updateCard: (newCard: CardType) => ({ type: types.UPDATE_CARD, payload: newCard })
 }
 
 export const initialState = Immutable({
@@ -37,7 +37,7 @@ export default (state: ImmutableType<FlashcardState> = initialState, { type, pay
       return state
         .setIn(['lastAnswer', 'answer'], payload)
         .setIn(['lastAnswer', 'correct'], false)
-    case types.UDPATE_CARD:
+    case types.UPDATE_CARD:
       return state
         .set('word', payload ? payload.word : '')
         .set('meaning', payload ? payload.meaning : '')
