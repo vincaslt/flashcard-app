@@ -6,12 +6,18 @@ import Input from './Input'
 import StyledSegment from './Segment'
 import Box from './Box'
 import ColoredSegment from './ColoredSegment'
-import type { PropTypes, LastAnswerType } from 'fl-flashcard'
+import type { LastAnswerType, CardType } from 'fl-flashcard'
 import { colors } from '../../constants'
 
 type StateType = {
   text: string,
   viewHash: ?number
+}
+
+declare type PropTypes = {
+  card: CardType,
+  submit: Function,
+  lastAnswer: ?LastAnswerType
 }
 
 export default class Flashcard extends Component {

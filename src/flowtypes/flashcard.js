@@ -11,12 +11,6 @@ declare module 'fl-flashcard' {
     correct: boolean
   }
 
-  declare type PropTypes = {
-    card: CardType,
-    submit: Function,
-    lastAnswer: ?LastAnswerType
-  }
-
   declare type StateType = {
     word: string,
     meaning: string,

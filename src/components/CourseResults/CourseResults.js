@@ -3,10 +3,22 @@
 import React from 'react'
 import type { CourseQuestionType } from 'fl-course'
 import { Table, Header } from 'semantic-ui-react'
+import { WordStatus } from '../../constants'
+import StrengthMeter from '../StrengthMeter'
 
 // TODO: only select relevant statistics not everything
 type PropTypes = {
   questions: Array<CourseQuestionType>
+}
+
+const mapStatusToValue = (status) => {
+  return {
+    [WordStatus.NEW]: 0,
+    [WordStatus.FRESH]: 1,
+    [WordStatus.AVERAGE]: 2,
+    [WordStatus.OLD]: 3,
+    [WordStatus.NEVER]: 4
+  }[status] || 0
 }
 
 const CourseResults = ({ questions, ...rest }: PropTypes) => {
@@ -14,7 +26,12 @@ const CourseResults = ({ questions, ...rest }: PropTypes) => {
     <Table.Row key={question.word + question.meaning}>
       <Table.Cell>{question.word}</Table.Cell>
       <Table.Cell>{question.meaning}</Table.Cell>
-      <Table.Cell>{question.status}</Table.Cell>
+      <Table.Cell>
+        <StrengthMeter
+          value={mapStatusToValue(question.status)}
+          max={mapStatusToValue(WordStatus.NEVER)}
+        />
+      </Table.Cell>
     </Table.Row>
     
   ))
