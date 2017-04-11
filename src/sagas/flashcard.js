@@ -1,13 +1,14 @@
 // @flow
 
+import SpacedRepetition from 'spaced-repetition'
 import { types as flashcardTypes, actions as flashcardActions } from '../reducers/flashcard'
 import { actions as courseActions, getAllQuestions, getCurrentQuestion } from '../reducers/course'
 import { getRepetitionConfig } from '../reducers/settings'
-import { WordStatus } from '../constants'
+import { WordStatus, AnswerStatus } from '../constants'
 import type { CourseQuestionType } from 'fl-course'
 import type { CardType } from 'fl-flashcard'
 import { takeLatest, takeEvery, put, select } from 'redux-saga/effects'
-import SpacedRepetition from 'spaced-repetition'
+import { checkAnswer } from '../utils/course'
 
 function* submitAnswerSaga(action) {
   const submittedAnswer: string = action.payload
@@ -15,7 +16,8 @@ function* submitAnswerSaga(action) {
   const repetitionConfig = yield select(getRepetitionConfig)
   const repetition = new SpacedRepetition(new Date(), status, repetitionConfig)
 
-  if (submittedAnswer.toLowerCase() === meaning.toLowerCase()) {
+  // TODO: rework how answers are set to account for good answer (answerCorrectly func)
+  if (checkAnswer(submittedAnswer, meaning) === AnswerStatus.GOOD) {
     yield put(flashcardActions.answerCorrectly(submittedAnswer))
     const nextRepetition = repetition.good() // TODO: account for good/ok difference
     yield put(courseActions.updateWordStatus(word, nextRepetition.state, nextRepetition.date))
@@ -28,6 +30,7 @@ function* submitAnswerSaga(action) {
 }
 
 function* requestUpdateCard(action) {
+  // TODO: move to utils
   const selectNextCard = (cards): ?CardType => {
     const remaining: Array<CourseQuestionType> = cards
       // Ignore words that are already learnt or their date is not yet due

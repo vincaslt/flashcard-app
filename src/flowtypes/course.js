@@ -1,4 +1,4 @@
-import { WordStatus } from '../constants'
+import { WordStatus, AnswerStatus } from '../constants'
 import type { Immutable } from 'fl-seamless-immutable'
 
 declare module 'fl-course' {
@@ -17,5 +17,7 @@ declare module 'fl-course' {
   }
 
   declare type WordStatusType = $Keys<typeof WordStatus>
+
+  declare type AnswerStatusType = $Keys<typeof AnswerStatus>
 
 }

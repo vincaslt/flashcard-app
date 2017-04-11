@@ -7,6 +7,7 @@
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
+    "redux-localstorage": "^0.4.1",
     "redux-saga": "^0.14.3",
     "reselect": "^2.5.4",
     "seamless-immutable": "^7.0.1",

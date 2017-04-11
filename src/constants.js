@@ -13,4 +13,10 @@ const WordStatus = {
   NEVER: 'never'
 }
 
-export { colors, WordStatus }
+const AnswerStatus = {
+  BAD: 0,
+  OK: 1,
+  GOOD: 2
+}
+
+export { colors, WordStatus, AnswerStatus }

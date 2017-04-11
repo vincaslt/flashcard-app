@@ -26,7 +26,7 @@ export const actions = {
 }
 
 export const initialState = Immutable({
-  questions: Immutable([]),
+  questions: [],
   isLoading: false,
   complete: false
 })
