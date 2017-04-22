@@ -8,6 +8,6 @@ export function getWords() {
     .then(words => words.map(word => ({
       ...word,
       status: WordStatus.NEW,
-      nextDate: Date.now()
+      nextDate: null
     })))
 }

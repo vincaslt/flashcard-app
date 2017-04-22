@@ -12,15 +12,15 @@ class CourseContainer extends PureComponent {
   }
 
   render() {
-    const { requestCourseLoad, getIsComplete, ...rest } = this.props
+    const { requestCourseLoad, ...rest } = this.props
     return (
-      <Course {...rest} isComplete={getIsComplete()} />
+      <Course {...rest} />
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  getIsComplete: () => getIsComplete(state)
+  isComplete: getIsComplete(state)
 })
 
 const mapDispatchToProps = {

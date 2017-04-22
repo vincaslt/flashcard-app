@@ -87,20 +87,21 @@ export const getNextQuestion: Selector<?CardType> = createSelector(
         card.status !== WordStatus.NEVER)
       )
       .asMutable()
-      // Sort: time<now | null
+      // Sort: time<now | null | time>now
       .sort((a: CourseQuestionType, b: CourseQuestionType) => {
-        return new Date(a.nextDate).getTime() - new Date(b.nextDate).getTime()
+        return (new Date(a.nextDate || Date.now()).getTime() - Date.now())
+               - (new Date(b.nextDate || Date.now()).getTime() - Date.now())
       })
     return remaining.length ? remaining[0] : null
   }
 )
 export const getNextQuestionDate: Selector<?Date> = createSelector(
   getNextQuestion,
-  (question: CourseQuestionType) => (question || {}).nextDate || null
+  (question: CourseQuestionType) => !question ? null : (question || {}).nextDate || Date.now()
 )
 
 // Non-memoized selector
 export const getIsComplete: Selector<boolean> = (state) => {
   const nextQuestionDate = getNextQuestionDate(state)
-  return !nextQuestionDate || nextQuestionDate.getTime() > (new Date()).getTime()
+  return !nextQuestionDate || new Date(nextQuestionDate).getTime() > (new Date()).getTime()
 }
