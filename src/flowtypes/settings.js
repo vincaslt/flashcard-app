@@ -1,3 +1,5 @@
+// @flow
+
 declare module 'fl-settings' {
 
   declare type RepetitionConfigType = {

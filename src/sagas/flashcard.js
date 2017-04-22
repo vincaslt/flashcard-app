@@ -1,7 +1,7 @@
 // @flow
 
 import SpacedRepetition from 'spaced-repetition'
-import { types as flashcardTypes, actions as flashcardActions } from '../reducers/flashcard'
+import { types as flashcardTypes, actions as flashcardActions, getAnswerTime } from '../reducers/flashcard'
 import { actions as courseActions, getNextQuestion, getCurrentQuestion, getIsComplete } from '../reducers/course'
 import { getRepetitionConfig } from '../reducers/settings'
 import {  AnswerStatus } from '../constants'
@@ -11,20 +11,24 @@ import { checkAnswer } from '../utils/course'
 function* submitAnswerSaga(action) {
   const submittedAnswer: string = action.payload
   const { word, meaning, status } = yield select(getCurrentQuestion)
+  const answerTime = yield select(getAnswerTime)
   const repetitionConfig = yield select(getRepetitionConfig)
   const repetition = new SpacedRepetition(new Date(), status, repetitionConfig)
+  const answerStatus = checkAnswer(submittedAnswer, meaning, answerTime)
+  let nextRepetition = null
 
-  // TODO: rework how answers are set to account for good answer (answerCorrectly func)
-  if (checkAnswer(submittedAnswer, meaning) === AnswerStatus.GOOD) {
+  if (answerStatus === AnswerStatus.GOOD) {
     yield put(flashcardActions.answerCorrectly(submittedAnswer))
-    const nextRepetition = repetition.good() // TODO: account for good/ok difference
-    yield put(courseActions.updateWordStatus(word, nextRepetition.state, nextRepetition.date))
-    yield put(flashcardActions.requestUpdateCard())
+    nextRepetition = repetition.good()
+  } else if (answerStatus === AnswerStatus.OK) {
+    yield put(flashcardActions.answerCorrectly(submittedAnswer))
+    nextRepetition = repetition.ok()
   } else {
     yield put(flashcardActions.answerIncorrectly(submittedAnswer))
-    const nextRepetition = repetition.bad()
-    yield put(courseActions.updateWordStatus(word, nextRepetition.state, nextRepetition.date))
+    nextRepetition = repetition.bad()
   }
+  yield put(courseActions.updateWordStatus(word, nextRepetition.state, nextRepetition.date))
+  yield put(flashcardActions.requestUpdateCard())
 }
 
 function* requestUpdateCard(action) {

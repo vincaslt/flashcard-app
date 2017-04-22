@@ -1,3 +1,5 @@
+// @flow
+
 import type { StateType as CourseState } from 'fl-course'
 import type { StateType as FlashcardState } from 'fl-flashcard'
 import type { StateType as SettingsState } from 'fl-settings'

@@ -20,9 +20,12 @@ export const types = {
 export const actions = {
   requestCourseLoad: () => ({ type: types.REQUEST_COURSE_LOAD }),
   loadCourse: (words: Array<CourseQuestionType>) => ({ type: types.LOAD_COURSE, payload: words }),
-  updateWordStatus: (word: string, status: string, nextDate: Date) => ({ type: types.UPDATE_WORD_STATUS, payload: {
-    word, status, nextDate: nextDate.getTime()
-  } }),
+  updateWordStatus: (word: string, status: string, nextDate: Date) => ({
+    type: types.UPDATE_WORD_STATUS,
+    payload: {
+      word, status, nextDate: new  Date(nextDate).getTime()
+    }
+  }),
   completeCourse: () => ({ type: types.COMPLETE_COURSE })
 }
 
@@ -47,7 +50,7 @@ export default (state: ImmutableType<CourseState> = initialState, { type, payloa
           .findIndex(question => ( payload && question.word === payload.word ))
         return state
           .setIn(['questions', wordIndex, 'status'], payload.status)
-          .setIn(['questions', wordIndex, 'nextDate'], payload.nextDate)
+          .setIn(['questions', wordIndex, 'nextDate'], new Date(payload.nextDate).getTime())
       }
       return state
     case types.COMPLETE_COURSE:

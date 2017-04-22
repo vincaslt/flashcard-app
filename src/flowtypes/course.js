@@ -1,3 +1,5 @@
+// @flow
+
 import { WordStatus, AnswerStatus } from '../constants'
 import type { Immutable } from 'fl-seamless-immutable'
 
