@@ -1,3 +1,5 @@
+// @flow
+
 declare module 'fl-flashcard' {
 
   declare type CardType = {
@@ -14,7 +16,9 @@ declare module 'fl-flashcard' {
   declare type StateType = {
     word: string,
     meaning: string,
-    lastAnswer: ?LastAnswerType
+    lastAnswer: ?LastAnswerType,
+    startTime: ?number,
+    endTime: ?number
   }
 
 }

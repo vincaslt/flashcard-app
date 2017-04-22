@@ -33,7 +33,6 @@ const CourseResults = ({ questions, ...rest }: PropTypes) => {
         />
       </Table.Cell>
     </Table.Row>
-    
   ))
 
   return (

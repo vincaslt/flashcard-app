@@ -1,3 +1,5 @@
+// @flow
+
 declare module 'fl-seamless-immutable' {
   declare type Immutable<T: Object | Array<*>> = T & {
     // Array methods

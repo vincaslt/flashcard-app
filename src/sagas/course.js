@@ -11,6 +11,8 @@ function* requestCourseLoadSaga() {
   if (questions.length === 0) {
     const words = yield call(getWords)
     yield put(actions.loadCourse(words))
+  } else {
+    yield put(actions.loadCourse(questions))
   }
   yield put(flashcardActions.requestUpdateCard())
 }
