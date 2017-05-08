@@ -114,6 +114,12 @@ export const nextQuestion = createSelector(
         return ((a.nextDate || new Date()).getTime() - Date.now())
              - ((b.nextDate || new Date()).getTime() - Date.now())
       })
+      
+    // TODO: Add smarter filtering than this
+    const lastBadAnswer = remaining.filter((card: Course.Question) => card.status === 'bad')
+    if (lastBadAnswer.length > 0) {
+      return lastBadAnswer[0]
+    }
     return remaining.length ? remaining[0] : null
   }
 )

@@ -9,12 +9,88 @@
           "meaning": "quite"
         },
         {
+          "word": "bien",
+          "meaning": "well; good"
+        },
+        {
+          "word": "demasiado",
+          "meaning": "too much"
+        },
+        {
+          "word": "la descripción",
+          "meaning": "description"
+        },
+        {
+          "word": "igual que",
+          "meaning": "like/the same as"
+        },
+        {
+          "word": "más (que)",
+          "meaning": "more (than)"
+        },
+        {
+          "word": "máximo",
+          "meaning": "maximum (adj.)"
+        },
+        {
+          "word": "mayor",
+          "meaning": "larger/older"
+        },
+        {
+          "word": "la mayoría",
+          "meaning": "the majority"
+        },
+        {
+          "word": "mejor",
+          "meaning": "better"
+        },
+        {
+          "word": "menor",
+          "meaning": "smaller/younger"
+        },
+        {
+          "word": "menos (que)",
+          "meaning": "less (than)"
+        },
+        {
+          "word": "mínimo",
+          "meaning": "minimum (adj.)"
+        },
+        {
           "word": "mismo",
           "meaning": "same"
         },
         {
           "word": "muy",
           "meaning": "very"
+        },
+        {
+          "word": "parecido a",
+          "meaning": "similar to"
+        },
+        {
+          "word": "peor",
+          "meaning": "worse"
+        },
+        {
+          "word": "poco",
+          "meaning": "little/ not much"
+        },
+        {
+          "word": "por ejemplo",
+          "meaning": "for example"
+        },
+        {
+          "word": "tan...como",
+          "meaning": "as...as"
+        },
+        {
+          "word": "tanto...como",
+          "meaning": "as much...as"
+        },
+        {
+          "word": "comparar",
+          "meaning": "to compare"
         }
       ]
     },
@@ -1960,7 +2036,7 @@
         },
         {
           "word": "la dirección",
-          "meaning": "management"
+          "meaning": "address; direction; management"
         },
         {
           "word": "la distancia",
@@ -2735,11 +2811,11 @@
           "meaning": "1st (fem.) = first (2nd, 3rd, etc.)"
         },
         {
-          "word": "Dr. (=Doctor)",
+          "word": "Dr. (=doctor)",
           "meaning": "Dr. (abbrev.) = male doctor"
         },
         {
-          "word": "Dra. (=Doctora)",
+          "word": "Dra. (=doctora)",
           "meaning": "Dr. (abbrev.) = female doctor"
         },
         {
@@ -3373,7 +3449,7 @@
         },
         {
           "word": "causar",
-          "meaning": "to cause"
+          "meaning": "to cause (c)"
         },
         {
           "word": "cenar",
@@ -3742,7 +3818,7 @@
         },
         {
           "word": "deportivo",
-          "meaning": "sporting"
+          "meaning": "sports (Adj.), (relating to sports); casual; sportsmanlike"
         },
         {
           "word": "la discriminación",
@@ -4110,7 +4186,7 @@
         },
         {
           "word": "perezoso",
-          "meaning": "lazy"
+          "meaning": "lazy (p)"
         },
         {
           "word": "el periquito",
@@ -4234,7 +4310,7 @@
         },
         {
           "word": "serio",
-          "meaning": "serious"
+          "meaning": "serious (s)"
         },
         {
           "word": "el sida",
@@ -4723,7 +4799,7 @@
         },
         {
           "word": "deportista",
-          "meaning": "sports/sporting"
+          "meaning": "sports-loving, sporty"
         },
         {
           "word": "el descanso",
@@ -6657,7 +6733,7 @@
         },
         {
           "word": "la dirección",
-          "meaning": "management"
+          "meaning": "address; direction; management"
         },
         {
           "word": "la discoteca",
@@ -6717,7 +6793,7 @@
         },
         {
           "word": "la estantería",
-          "meaning": "bookcase/shelving"
+          "meaning": "bookcase (e) / shelving"
         },
         {
           "word": "el estéreo",
@@ -6809,7 +6885,7 @@
         },
         {
           "word": "la librería",
-          "meaning": "bookcase/bookshop"
+          "meaning": "bookcase (l) / bookshop"
         },
         {
           "word": "limpio",
@@ -7198,7 +7274,7 @@
         },
         {
           "word": "el fuego",
-          "meaning": "fire"
+          "meaning": "fire (f)"
         },
         {
           "word": "la gasolina sin plomo",
@@ -7206,7 +7282,7 @@
         },
         {
           "word": "grave",
-          "meaning": "serious"
+          "meaning": "serious (g)"
         },
         {
           "word": "el medio ambiente",
@@ -8601,7 +8677,7 @@
         },
         {
           "word": "provocar",
-          "meaning": "to cause"
+          "meaning": "to cause (p)"
         }
       ]
     },
@@ -8666,7 +8742,7 @@
         },
         {
           "word": "la dirección",
-          "meaning": "management"
+          "meaning": "address; direction; management"
         },
         {
           "word": "el encargado",
@@ -8766,7 +8842,7 @@
         },
         {
           "word": "vago",
-          "meaning": "lazy"
+          "meaning": "lazy (v)"
         },
         {
           "word": "viudo",
@@ -9206,7 +9282,7 @@
         },
         {
           "word": "el incendio",
-          "meaning": "fire"
+          "meaning": "fire (i)"
         },
         {
           "word": "inquietante",
